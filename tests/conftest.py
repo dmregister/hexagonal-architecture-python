@@ -5,12 +5,12 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
 
-from hex.adapters.database.postgres import metadata
+from hex.adapters.outgoing.persistence.postgres import metadata
 
 
 @pytest.fixture
 def database_uri() -> Optional[str]:
-    return os.getenv('DATABASE_URI')
+    return f"{os.getenv('DATABASE_URI')}/hex_{os.getenv('ENV')}"
 
 
 @pytest.fixture

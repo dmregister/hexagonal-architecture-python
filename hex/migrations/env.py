@@ -38,7 +38,7 @@ def run_migrations_offline() -> None:
 
     """
 
-    url = os.getenv('DATABASE_URI')
+    url = f"{os.getenv('DATABASE_URI')}/hex_{os.getenv('ENV')}"
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -58,7 +58,7 @@ def run_migrations_online() -> None:
 
     """
     config_copy = config.get_section(config.config_ini_section).copy()
-    config_copy['sqlalchemy.url'] = os.getenv('DATABASE_URI')
+    config_copy['sqlalchemy.url'] = f"{os.getenv('DATABASE_URI')}/hex_{os.getenv('ENV')}"
 
     connectable = engine_from_config(
         config_copy,

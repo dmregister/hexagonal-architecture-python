@@ -3,13 +3,13 @@ import os
 import inject
 from flask import Flask
 
-from hex.adapters.database.postgres import PostgresAdapter
-from hex.domain.database_interface import DatabaseInterface
+from hex.adapters.outgoing.persistence.postgres import PostgresAdapter
+from hex.adapters.outgoing.persistence.database_interface import DatabaseInterface
 
 
 def configure_application(application: Flask) -> None:
     application.config.update(
-        DATABASE_URI=os.getenv('DATABASE_URI')
+        DATABASE_URI=f"{os.getenv('DATABASE_URI')}/hex_{os.getenv('ENV')}"
     )
 
 

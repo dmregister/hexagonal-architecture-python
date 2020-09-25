@@ -1,7 +1,7 @@
 from flask import Flask
 
 from hex.configuration import configure_inject, configure_application
-from hex.web.post_blueprint import create_post_blueprint
+from hex.adapters.incoming.http.post_blueprint import create_post_blueprint
 
 
 def create_application() -> Flask:

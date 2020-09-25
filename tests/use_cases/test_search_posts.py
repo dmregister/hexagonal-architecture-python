@@ -7,7 +7,7 @@ import pytest
 from hex.domain.actions.get_post import GetPost
 from hex.domain.actions.search_posts import SearchPosts
 from hex.domain.post import Post
-from hex.domain.database_interface import DatabaseInterface
+from hex.adapters.outgoing.persistence.database_interface import DatabaseInterface
 
 
 @pytest.fixture
@@ -32,14 +32,6 @@ def post() -> Post:
 
 
 class TestPosts:
-    def test_get_posts(self, injector: None, database: Mock, post: Post) -> None:
-        database.get_post.return_value = post
-
-        result = GetPost().execute(1)
-
-        assert result == post
-        database.get_post.assert_called_once_with(1)
-
     def test_search_posts(self, injector: None, database: Mock, post: Post) -> None:
         database.search_posts.return_value = [post]
         database.count_posts.return_value = 100

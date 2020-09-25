@@ -7,10 +7,10 @@ pipenv install --dev
 echo "FLASK_APP=hex.application:create_application
 FLASK_ENV=development
 ENV=dev
-DATABASE_URI=postgresql://localhost/hex_dev" >> .env
+DATABASE_URI=postgresql://localhost/hex_dev" > .env
 
 echo "ENV=test
-DATABASE_URI=postgresql://localhost/hex_test" >> .env.test
+DATABASE_URI=postgresql://localhost/hex_test" > .env.test
 
 echo "Run the database migrations!"
 echo "hex db create && hex db migrate"

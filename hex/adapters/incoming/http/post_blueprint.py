@@ -1,12 +1,12 @@
 import inject
 from flask import Blueprint, jsonify, Response, request
 
-from hex.domain.actions.get_post import GetPost
-from hex.domain.actions.search_posts import SearchPosts
+from hex.use_cases.get_posts import GetPostUseCase
+from hex.use_cases.search_posts import SearchPostsUseCase
 
 
 @inject.autoparams()
-def create_post_blueprint(search_posts: SearchPosts, get_post: GetPost) -> Blueprint:
+def create_post_blueprint(search_posts: SearchPostsUseCase, get_post: GetPostUseCase) -> Blueprint:
     post_blueprint = Blueprint('post', __name__)
 
     @post_blueprint.route('/posts')

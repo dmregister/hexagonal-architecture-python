@@ -5,7 +5,7 @@ from sqlalchemy import (
 )
 
 from hex.domain.post import Post
-from hex.domain.database_interface import DatabaseInterface
+from hex.adapters.outgoing.persistence.database_interface import DatabaseInterface
 
 metadata = MetaData()
 

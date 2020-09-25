@@ -7,28 +7,28 @@ from flask import Flask
 from flask.testing import FlaskClient
 from pytest_mock import MockFixture
 
-from hex.domain.actions.get_post import GetPost
-from hex.domain.actions.search_posts import SearchPosts
+from hex.use_cases.get_posts import GetPostUseCase
+from hex.use_cases.search_posts import SearchPostsUseCase
 from hex.domain.post import Post
-from hex.web.post_blueprint import create_post_blueprint
+from hex.adapters.incoming.http.post_blueprint import create_post_blueprint
 from tests.utils.dates import datetime_to_rfc822_string
 
 
 @pytest.fixture
 def get_post(mocker: MockFixture) -> Mock:
-    return mocker.patch('hex.web.post_blueprint.GetPost')
+    return mocker.patch('hex.adapters.incoming.http.post_blueprint.GetPostUseCase')
 
 
 @pytest.fixture
 def search_posts(mocker: MockFixture) -> Mock:
-    return mocker.patch('hex.web.post_blueprint.SearchPosts')
+    return mocker.patch('hex.adapters.incoming.http.post_blueprint.SearchPostsUseCase')
 
 
 @pytest.fixture
 def injector(get_post: Mock, search_posts: Mock) -> None:
     inject.clear_and_configure(lambda binder: binder
-                               .bind(GetPost, get_post)
-                               .bind(SearchPosts, search_posts))
+                               .bind(GetPostUseCase, get_post)
+                               .bind(SearchPostsUseCase, search_posts))
 
 
 @pytest.fixture

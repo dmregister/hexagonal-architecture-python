@@ -6,7 +6,7 @@ from hex.domain.post import Post
 from hex.adapters.outgoing.persistence.database_interface import DatabaseInterface
 
 
-class SearchPosts:
+class SearchPostsUseCase:
     @inject.autoparams()
     def __init__(self, database: DatabaseInterface):
         self.__database = database
