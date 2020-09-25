@@ -4,8 +4,7 @@ from unittest.mock import Mock
 import inject
 import pytest
 
-from hex.domain.actions.get_post import GetPost
-from hex.domain.actions.search_posts import SearchPosts
+from hex.use_cases.get_posts import GetPostUseCase
 from hex.domain.post import Post
 from hex.adapters.outgoing.persistence.database_interface import DatabaseInterface
 
@@ -35,7 +34,7 @@ class TestPosts:
     def test_get_posts(self, injector: None, database: Mock, post: Post) -> None:
         database.get_post.return_value = post
 
-        result = GetPost().execute(1)
+        result = GetPostUseCase().execute(1)
 
         assert result == post
         database.get_post.assert_called_once_with(1)

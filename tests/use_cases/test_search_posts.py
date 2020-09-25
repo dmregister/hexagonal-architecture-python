@@ -4,8 +4,7 @@ from unittest.mock import Mock
 import inject
 import pytest
 
-from hex.domain.actions.get_post import GetPost
-from hex.domain.actions.search_posts import SearchPosts
+from hex.use_cases.search_posts import SearchPostsUseCase
 from hex.domain.post import Post
 from hex.adapters.outgoing.persistence.database_interface import DatabaseInterface
 
@@ -36,7 +35,7 @@ class TestPosts:
         database.search_posts.return_value = [post]
         database.count_posts.return_value = 100
 
-        result = SearchPosts().execute(start_after=10, end_before=90)
+        result = SearchPostsUseCase().execute(start_after=10, end_before=90)
 
         assert result == ([post], 100)
         database.search_posts.assert_called_once_with(start_after=10, end_before=90)
