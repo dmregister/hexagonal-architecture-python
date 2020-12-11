@@ -5,7 +5,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
 
-from hex.adapters.outgoing.persistence.postgres import metadata
+from hex.adapters.outgoing.persistence.post_repository import metadata
 
 
 @pytest.fixture

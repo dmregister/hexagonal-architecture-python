@@ -20,7 +20,7 @@ posts = Table('posts', metadata,
                      onupdate=func.now()))
 
 
-class PostgresAdapter(DatabaseInterface):
+class PostRepository(DatabaseInterface):
     def __init__(self, database_uri: str) -> None:
         engine = create_engine(database_uri)
         self.__connection = engine.connect()
@@ -29,6 +29,10 @@ class PostgresAdapter(DatabaseInterface):
         query = posts.select().where(posts.c.id == post_id)
         cursor = self.__connection.execute(query)
         row = cursor.fetchone()
+
+        if row is None:
+            raise ValueError('Post not found with', {'id': post_id})
+
         return Post(**row)
 
     def search_posts(self, start_after: Optional[int] = None,
